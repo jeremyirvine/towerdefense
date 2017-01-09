@@ -24,8 +24,8 @@ public class MainMenu
 		this.background = loadTexture("mainmenu");
 		this.menuUI = new UI();
 		menuUI.addButton("Play", "playbutton", WIDTH / 2 - 128, (int) (HEIGHT * 0.45f));
-		menuUI.addButton("Play", "editorbutton", WIDTH / 2 - 128, (int) (HEIGHT * 0.45f) + 128);
-		menuUI.addButton("Play", "quitbutton", WIDTH / 2 - 128, (int) (HEIGHT * 0.45f) + 256);
+		menuUI.addButton("Editor", "editorbutton", WIDTH / 2 - 128, (int) (HEIGHT * 0.45f) + 128);
+		menuUI.addButton("Quit", "quitbutton", WIDTH / 2 - 128, (int) (HEIGHT * 0.45f) + 256);
 	}
 	
 	private void updateButtons()
