@@ -11,7 +11,8 @@ public enum ConsoleCommands
 	goldMaster("goldMaster", "God Mode"),
 	checkTimeScale("checkTimeScale", "Prints the current timeScale"),
 	exit("exit", "Exits the whole program"),
-	help("help", "Prints out helpful information");
+	help("help", "Prints out helpful information"),
+	getState("getState", "Gets the current gameState (MAINMENU, GAME, EDITOR)");
 	
 	public String textname;
 	public String helpToolTip;

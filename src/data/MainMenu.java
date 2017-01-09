@@ -34,10 +34,11 @@ public class MainMenu
 		{
 			clicked = true;
 			if(menuUI.isButtonClicked("Play")) 
-			{
-				Announcer.printf("Starting GAME");
 				StateManager.setState(GameState.GAME);
-			}
+			if(menuUI.isButtonClicked("Editor"))
+				StateManager.setState(GameState.EDITOR);
+			if(menuUI.isButtonClicked("Quit"))
+				System.exit(0);
 		}
 		if(!Mouse.isButtonDown(0))
 			clicked = false;

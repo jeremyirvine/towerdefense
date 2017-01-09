@@ -1,7 +1,26 @@
  package helpers;
 
-import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL11.GL_BLEND;
+import static org.lwjgl.opengl.GL11.GL_LINES;
+import static org.lwjgl.opengl.GL11.GL_MODELVIEW;
+import static org.lwjgl.opengl.GL11.GL_ONE_MINUS_SRC_ALPHA;
+import static org.lwjgl.opengl.GL11.GL_PROJECTION;
+import static org.lwjgl.opengl.GL11.GL_QUADS;
+import static org.lwjgl.opengl.GL11.GL_SRC_ALPHA;
+import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
+import static org.lwjgl.opengl.GL11.glBegin;
+import static org.lwjgl.opengl.GL11.glBlendFunc;
+import static org.lwjgl.opengl.GL11.glEnable;
+import static org.lwjgl.opengl.GL11.glEnd;
+import static org.lwjgl.opengl.GL11.glLoadIdentity;
+import static org.lwjgl.opengl.GL11.glMatrixMode;
+import static org.lwjgl.opengl.GL11.glOrtho;
+import static org.lwjgl.opengl.GL11.glRotatef;
+import static org.lwjgl.opengl.GL11.glTexCoord2f;
+import static org.lwjgl.opengl.GL11.glTranslatef;
+import static org.lwjgl.opengl.GL11.glVertex2f;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -11,8 +30,6 @@ import org.lwjgl.opengl.DisplayMode;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 import org.newdawn.slick.util.ResourceLoader;
-
-import data.Tile;
 
 public class Artist 
 {
@@ -108,9 +125,14 @@ public class Artist
 		try 
 		{
 			tex = TextureLoader.getTexture("PNG", in);
+			
 		} catch (IOException e) 
 		{
-			Announcer.printf("Could not load file '" + path + "'", LogLevel.WARN);
+			Announcer.printf("Could not load file '" + path + "'", LogLevel.FATAL);
+		}
+		catch (RuntimeException e)
+		{
+			Announcer.printf("Could not load file '" + path + "'", LogLevel.FATAL);
 		}
 		return tex;
 	}
@@ -122,8 +144,10 @@ public class Artist
 		try 
 		{
 			tex = TextureLoader.getTexture(fileType, in);
-		} catch (IOException e) 
+		} catch (RuntimeException e)
 		{
+			e.printStackTrace();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return tex;

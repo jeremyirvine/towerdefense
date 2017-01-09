@@ -48,11 +48,7 @@ public class Player
 		this.leftMouseButtonPressed = false;
 	}
 	
-	public void setTile()
-	{
-		grid.setTile((int) Math.floor(Mouse.getX() / 64), 
-				(int) Math.floor((HEIGHT - Mouse.getY() - 1) / 64), types[index]);
-	}
+
 	
 	public void update()
 	{
@@ -62,7 +58,6 @@ public class Player
 		//Handle mouse input
 		if(Mouse.isButtonDown(0) && !leftMouseButtonPressed)
 		{
-			Announcer.printf("Mouse button 0 down");
 			towerList.add(new TowerCannon(loadTexture("cannonBase"), loadTexture("cannonGun"), grid.getTile(Mouse.getX() / 64, (HEIGHT - Mouse.getY() - 1) / 64), 10, waveManager.getCurrentWave().getEnemyList()));
 //			setTile();
 		}

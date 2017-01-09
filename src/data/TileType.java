@@ -6,15 +6,16 @@ import java.util.Map;
 public enum TileType 
 {
 
-	Null("water", false, -1, false),
-	Grass("grass", true, 0, true), 
-	Dirt("dirt", false, 1, true),
-	Water("water", false, 2, true);
+	Null("water", false, -1, false, "3"),
+	Grass("grass", true, 0, true, "0"), 
+	Dirt("dirt", false, 1, true, "1"),
+	Water("water", false, 2, true, "2");
 	
 	String textureName;
 	boolean buildable;
 	private int id;
 	boolean placeable;
+	String fileID;
 	
 	private static Map<Integer, TileType> map = new HashMap<Integer, TileType>();
 	
@@ -35,12 +36,13 @@ public enum TileType
 		return map;
 	}
 	
-	TileType(String textureName, boolean buildable, int id, boolean placeable)
+	TileType(String textureName, boolean buildable, int id, boolean placeable, String fileID)
 	{
 		this.textureName = textureName;
 		this.buildable = buildable;
 		this.id = id;
 		this.placeable = placeable;
+		this.fileID = fileID;
 	}
 	
 	
@@ -48,6 +50,11 @@ public enum TileType
 	public static TileType getTileByID(int id)
 	{
 		return map.get(id);
+	}
+	
+	public String getFileID() 
+	{
+		return fileID;
 	}
 	
 }

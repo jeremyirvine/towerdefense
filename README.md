@@ -10,3 +10,12 @@ This is a branch off of IndieProgrammer's (https://www.youtube.com/channel/UC0MH
 To add a command to the console, visit the ConsoleCommands class and type in the name of the command, e.g. setTime("setTime"). 
 
 Then travel to the ConsoleView, scroll down till you see interpretCommand, add your command, e.g. case setTime: and remember to return true once you complete the command
+
+# Current Working Commands
+- [X] setTimeScale
+- [X] checkTimeScale
+- [X] exit
+- [X] help
+- [X] getState
+- [ ] setPlayerHealth
+- [ ] goldMaster

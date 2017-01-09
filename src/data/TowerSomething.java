@@ -23,6 +23,7 @@ public class TowerSomething
 {
 
 	public static int enemyLimit = 50;
+	public static ConsoleView cv;
 	
 	public TowerSomething()
 	{
@@ -68,13 +69,13 @@ public class TowerSomething
 		// Begin console
 		if(args.length == 1)
 			if(args[0].equalsIgnoreCase("console")) {
-				ConsoleView cv = new ConsoleView();
+				cv = new ConsoleView();
 				
 				PrintStream myStream = new PrintStream(System.out) {
 				    @Override
 				    public void println(String x) {
 				        super.println(x);
-				        cv.addConsoleItem(x);
+				        cv.addConsoleItem(x, LogLevel.INFO);
 				    }
 				};
 				System.setOut(myStream);
@@ -82,7 +83,7 @@ public class TowerSomething
 				    @Override
 				    public void println(String x) {
 				        super.println(x);
-				        cv.addConsoleItem(x);
+				        cv.addConsoleItem(x, LogLevel.WARN);
 				    }
 				};
 				System.setErr(myStream2);

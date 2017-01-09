@@ -48,7 +48,9 @@ public class StateManager
 				game.update();
 				break;
 			case EDITOR:
-				
+				if(editor == null)
+					editor = new Editor();
+				editor.update();
 				break;
 		}
 	}
@@ -56,6 +58,11 @@ public class StateManager
 	public static void setState(GameState newState)
 	{
 		gameState = newState;
+	}
+	
+	public static GameState getState() 
+	{
+		return gameState;
 	}
 	
 	
