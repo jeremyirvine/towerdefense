@@ -21,7 +21,7 @@ public class Editor
 
 	public Editor() 
 	{
-		grid = new TileGrid();
+		this.grid = loadMap("testmap");
 		this.index = 0;
 		this.types = new TileType[TileType.getAmtTiles() - 1];
 		
