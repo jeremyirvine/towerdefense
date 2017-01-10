@@ -11,14 +11,15 @@ public class TowerCannon
 {
 
 	private float x, y, timeSinceLastShot, fireRate, angle;
-	private int width, height, damage;
+	private int width, height, damage, range;
 	private Texture baseTexture, cannonTexture;
 	private Tile startTile;
 	private ArrayList<Projectile> projectiles;
 	private ArrayList<Enemy> enemies;
 	private Enemy target;
+	private boolean targeted;
 	
-	public TowerCannon(Texture baseTexture, Texture cannonTexture, Tile startTile, int damage, ArrayList<Enemy> enemies)
+	public TowerCannon(Texture baseTexture, Texture cannonTexture, Tile startTile, int damage, int range, ArrayList<Enemy> enemies)
 	{
 		this.startTile = startTile;
 		this.baseTexture = baseTexture;
@@ -28,16 +29,29 @@ public class TowerCannon
 		this.width = (int) startTile.getWidth();
 		this.height = (int) startTile.getHeight();
 		this.damage = damage;
+		this.range = range;
 		this.fireRate = 3;
 		this.timeSinceLastShot = 0;
 		this.projectiles = new ArrayList<Projectile>();
 		this.enemies = enemies;
-		this.target = acquireTarget();
-		this.angle = calculateAngle();
+		this.targeted = false;
+//		this.target = acquireTarget();
+//		this.angle = calculateAngle();
+	}
+	
+	public void updateEnemyList(ArrayList<Enemy> newList)
+	{
+		enemies = newList;
 	}
 	
 	public void update()
 	{
+		if(!targeted)
+			target = acquireTarget();
+		
+		if(target == null || !target.isAlive())
+			targeted = false;
+		
 		timeSinceLastShot += Delta();
 		if(timeSinceLastShot > fireRate)
 			shoot();
@@ -57,7 +71,36 @@ public class TowerCannon
 	
 	private Enemy acquireTarget()
 	{
-		return enemies.get(0);
+		Enemy closest = null;
+		
+		float closestDistance = 10000;
+		for(Enemy e : enemies)
+		{
+			if(isInRange(e) && findDistance(e) < closestDistance)
+			{
+				closestDistance = findDistance(e);
+				closest = e;
+			}
+		}
+		if(closest != null)
+			targeted = true;
+		return closest;
+	}
+	
+	private boolean isInRange(Enemy e)
+	{
+		float xDistance = Math.abs(e.getX() - x);
+		float yDistance = Math.abs(e.getY() - y);
+		if(xDistance < range && yDistance < range)
+			return true;
+		return false;
+	}
+	
+	private float findDistance(Enemy e)
+	{
+		float xDistance = Math.abs(e.getX() - x);
+		float yDistance = Math.abs(e.getY() - y);
+		return xDistance + yDistance;
 	}
 	
 	private void shoot()

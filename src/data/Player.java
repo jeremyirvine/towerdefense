@@ -48,17 +48,18 @@ public class Player
 		this.leftMouseButtonPressed = false;
 	}
 	
-
-	
 	public void update()
 	{
 		for(TowerCannon t : towerList)
+		{
 			t.update();
+			t.updateEnemyList(waveManager.getCurrentWave().getEnemyList());
+		}
 		
 		//Handle mouse input
 		if(Mouse.isButtonDown(0) && !leftMouseButtonPressed)
 		{
-			towerList.add(new TowerCannon(loadTexture("cannonBase"), loadTexture("cannonGun"), grid.getTile(Mouse.getX() / 64, (HEIGHT - Mouse.getY() - 1) / 64), 10, waveManager.getCurrentWave().getEnemyList()));
+			towerList.add(new TowerCannon(loadTexture("cannonBase"), loadTexture("cannonGun"), grid.getTile(Mouse.getX() / 64, (HEIGHT - Mouse.getY() - 1) / 64),  10, 1000, waveManager.getCurrentWave().getEnemyList()));
 //			setTile();
 		}
 		
@@ -77,7 +78,7 @@ public class Player
 			}
 			if(Keyboard.getEventKey() == Keyboard.KEY_T && Keyboard.getEventKeyState())
 			{
-				towerList.add(new TowerCannon(loadTexture("cannonBase"), loadTexture("cannonGun"), grid.getTile(5, 2), 10, waveManager.getCurrentWave().getEnemyList()));
+				towerList.add(new TowerCannon(loadTexture("cannonBase"), loadTexture("cannonGun"), grid.getTile(5, 2), 10, 1000, waveManager.getCurrentWave().getEnemyList()));
 			}
 		}
 	}

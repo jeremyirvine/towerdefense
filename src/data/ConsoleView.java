@@ -292,18 +292,21 @@ public class ConsoleView extends JFrame implements ActionListener{
 			if(l.getLogLevel() == LogLevel.FATAL)
 			{
 				setForeground(Color.red);
-				setBackground(Color.white);
 			}
 			if(l.getLogLevel() == LogLevel.WARN)
 			{
 				setForeground(Color.orange);
-				setBackground(Color.white);
 			}
 			if(l.getLogLevel() == LogLevel.INFO)
 			{
 				setForeground(Color.black);
-				setBackground(Color.white);
+				
 			}
+			
+			if(isSelected)
+				setBackground(Color.lightGray);
+			else
+				setBackground(Color.white);
 			
 			return this;
 		}
