@@ -63,7 +63,7 @@ public class TowerCannon
 	private void shoot()
 	{
 		timeSinceLastShot = 0;
-		projectiles.add(new Projectile(loadTexture("bullet"), target, x + Game.tileSize / 2 - Game.tileSize / 4, y + Game.tileSize / 2 - Game.tileSize / 4, 600, damage));
+		projectiles.add(new Projectile(loadTexture("bullet"), target, x + Game.tileSize / 2 - Game.tileSize / 4, y + Game.tileSize / 2 - Game.tileSize / 4, 32, 32, 600, damage));
 	}
 	
 	public void draw()

@@ -1,11 +1,13 @@
 package data;
 
-import static helpers.Artist.*;
-import static helpers.Clock.*;
+import static helpers.Artist.DrawQuadTex;
+import static helpers.Clock.Delta;
 
 import java.util.ArrayList;
 
 import org.newdawn.slick.opengl.Texture;
+
+import helpers.Vector2f;
 
 public class Enemy 
 {
@@ -16,18 +18,23 @@ public class Enemy
 	private Tile startTile;
 	private boolean first = true, alive = true;
 	private TileGrid grid;
+	private Vector2f pos;
+	private Vector2f size;
 	
 	private ArrayList<Checkpoint> checkpoints;
 	private int[] directions;
  	
-	public Enemy(Tile startTile, int width, int height, float speed, Texture texture, TileGrid grid)
+	public Enemy(Tile startTile, int width, int height, float speed, Texture texture, TileGrid grid, int health)
 	{
 		this.x = startTile.getX();
 		this.y = startTile.getY();
+		this.pos = new Vector2f(x, y);
 		this.width = width;
 		this.height = height;
+		this.size = new Vector2f(width, height);
 		this.texture = texture;
 		this.speed = speed;
+		this.health = health;
 		this.startTile = startTile;
 		this.grid = grid;
 		
@@ -59,6 +66,8 @@ public class Enemy
 			{
 				x += Delta() * checkpoints.get(currentCheckpoint).getxDirection() * speed;
 				y += Delta() * checkpoints.get(currentCheckpoint).getyDirection() * speed;
+				pos.setX(x);
+				pos.setY(y);
 			}
 		}
 	}
@@ -167,6 +176,13 @@ public class Enemy
 		return dir;
 	}
 	
+	public void damage(int amount)
+	{
+		health -= amount;
+		if(health <= 0)
+			die(DeathType.KBP);
+	}
+	
 	public void draw()
 	{
 			DrawQuadTex(texture, x, y, width, height);
@@ -251,7 +267,15 @@ public class Enemy
 	{
 		return startTile;
 	}
+	
+	public Vector2f getPos() {
+		return pos;
+	}
 
+	public Vector2f getSize() {
+		return size;
+	}
+	
 	public void setStartTile(Tile startTile) 
 	{
 		this.startTile = startTile;

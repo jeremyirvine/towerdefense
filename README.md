@@ -17,5 +17,7 @@ Then travel to the ConsoleView, scroll down till you see interpretCommand, add y
 - [X] exit
 - [X] help
 - [X] getState
+- [X] setState
+- [ ] setMap
 - [ ] setPlayerHealth
 - [ ] goldMaster

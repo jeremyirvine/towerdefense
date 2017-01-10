@@ -64,6 +64,14 @@ public class Artist
 		System.exit(0);
 	}
 	
+	public static boolean CheckCollision(Vector2f pos1, Vector2f size1, Vector2f pos2, Vector2f size2)
+	{
+		if(pos1.x + size1.x > pos2.x && pos1.x < pos2.x + size1.x
+				&& pos1.y + size1.y > pos2.y && pos1.y < pos2.y + size2.y)
+			return true;
+		return false;
+	}
+	
 	public static void DrawQuad(float x, float y, float width, float height)
 	{
 		glBegin(GL_QUADS);

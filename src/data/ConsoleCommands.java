@@ -12,7 +12,9 @@ public enum ConsoleCommands
 	checkTimeScale("checkTimeScale", "Prints the current timeScale"),
 	exit("exit", "Exits the whole program"),
 	help("help", "Prints out helpful information"),
-	getState("getState", "Gets the current gameState (MAINMENU, GAME, EDITOR)");
+	getState("getState", "Gets the current gameState (MAINMENU, GAME, EDITOR)"),
+	setMap("setMap", "Sets the map (EDITOR ONLY)"),
+	setState("setState", "Sets the gameState");
 	
 	public String textname;
 	public String helpToolTip;

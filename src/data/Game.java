@@ -16,7 +16,7 @@ public class Game
 	public Game(int[][] map)
 	{
 		grid = new TileGrid(map);
-		waveManager = new WaveManager(new Enemy(grid.getTile(1,3), 64, 64, 100, loadTexture("ufo"), grid), 
+		waveManager = new WaveManager(new Enemy(grid.getTile(1,3), 64, 64, 100, loadTexture("ufo"), grid, 25), 
 				2, 2);
 		player = new Player(grid, waveManager);
 		

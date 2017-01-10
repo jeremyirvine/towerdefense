@@ -21,6 +21,7 @@ import helpers.Announcer;
 import helpers.Clock;
 import helpers.LogLevel;
 import helpers.StateManager;
+import helpers.StateManager.GameState;
 
 public class ConsoleView extends JFrame implements ActionListener{
 	
@@ -200,6 +201,43 @@ public class ConsoleView extends JFrame implements ActionListener{
 			case getState:
 				Announcer.printcon("Current GameState: " + StateManager.getState());
 				return true;
+			case setMap:
+				if(StateManager.getState() == GameState.EDITOR)
+				{
+					if(args != "")
+					{
+						Announcer.printcon("Loading \"" + args + "\"...");
+					}
+					else
+					{
+						Announcer.printcon("Usage: setMap (mapName)", LogLevel.WARN);
+					}
+				}
+				else
+				{
+					Announcer.printcon("Modification of non-EDITOR maps is not allowed...", LogLevel.WARN);
+				}
+				return true;
+			case setState:
+				if(args != "")
+				{
+					switch (args.toUpperCase()) {
+					case "EDITOR":
+						Announcer.printcon("Setting State to " + args.toUpperCase() + "...");
+						StateManager.setState(GameState.EDITOR);
+						return true;
+					case "GAME":
+						Announcer.printcon("Setting State to " + args.toUpperCase() + "...");
+						StateManager.setState(GameState.GAME);
+						return true;
+					case "MAINMENU":
+						Announcer.printcon("Setting State to " + args.toUpperCase() + "...");
+						StateManager.setState(GameState.MAINMENU);
+						return true;
+					}
+				}
+				Announcer.printcon("State " + args + " not recognized...", LogLevel.WARN);
+				return false;
 		}
 	}
 	
