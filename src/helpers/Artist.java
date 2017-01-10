@@ -20,7 +20,6 @@ import static org.lwjgl.opengl.GL11.glTexCoord2f;
 import static org.lwjgl.opengl.GL11.glTranslatef;
 import static org.lwjgl.opengl.GL11.glVertex2f;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -36,6 +35,7 @@ public class Artist
 
 	public static final int WIDTH = 1280, HEIGHT = 832;
 	public static int FRAME_CAP = 60;
+	public static final int TILE_SIZE = 64;
 	
 	public static void BeginSession()
 	{
@@ -64,7 +64,7 @@ public class Artist
 		System.exit(0);
 	}
 	
-	public static boolean CheckCollision(Vector2f pos1, Vector2f size1, Vector2f pos2, Vector2f size2)
+	public static boolean checkCollision(Vector2f pos1, Vector2f size1, Vector2f pos2, Vector2f size2)
 	{
 		if(pos1.x + size1.x > pos2.x && pos1.x < pos2.x + size1.x
 				&& pos1.y + size1.y > pos2.y && pos1.y < pos2.y + size2.y)

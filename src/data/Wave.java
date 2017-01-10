@@ -1,7 +1,8 @@
 package data;
 
+import static helpers.Clock.Delta;
+
 import java.util.ArrayList;
-import static helpers.Clock.*;
 
 public class Wave {
 

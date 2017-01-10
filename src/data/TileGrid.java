@@ -1,6 +1,7 @@
 package data;
 
 import helpers.Vector2f;
+import static helpers.Artist.*;
 
 public class TileGrid 
 {
@@ -17,7 +18,7 @@ public class TileGrid
 		{
 			for(int j = 0; j < map[i].length; j++)
 			{
-				map[i][j] = new Tile(i * 64, j * 64, 64, 64, TileType.Grass);
+				map[i][j] = new Tile(i * TILE_SIZE, j * TILE_SIZE, TILE_SIZE, TILE_SIZE, TileType.Grass);
 			}
 		}
 	}
@@ -32,14 +33,14 @@ public class TileGrid
 			for(int j = 0; j < map[i].length; j++)
 			{
 				if(TileType.getAmtTiles() >= 1)
-					map[i][j] = new Tile(i * 64, j * 64, 64, 64, TileType.getTileByID(newMap[j][i]));
+					map[i][j] = new Tile(i * TILE_SIZE, j * TILE_SIZE, TILE_SIZE, TILE_SIZE, TileType.getTileByID(newMap[j][i]));
 			}
 		}
 	}
 	
 	public void setTile(int x, int y, TileType tile)
 	{
-		map[x][y] = new Tile(x * 64, y * 64, 64, 64, tile);
+		map[x][y] = new Tile(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE, tile);
 	}
 	
 	public Tile getTile(Vector2f loc)

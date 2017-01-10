@@ -1,6 +1,6 @@
 package data;
 
-public abstract class Tower implements Entity
+public class Tower implements Entity
 {
 
 	private float x, y;

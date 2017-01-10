@@ -1,23 +1,20 @@
 package data;
 
-import static helpers.Artist.*;
+import static helpers.Artist.HEIGHT;
+import static helpers.Artist.loadTexture;
 
 import java.util.ArrayList;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
-import helpers.Announcer;
 import helpers.Clock;
-import helpers.LogLevel;
 
 public class Player 
 {
 
 	private TileGrid grid;
 	private TileType[] types;
-	private int index = 0;
-	private int x;
 	private WaveManager waveManager;
 	private ArrayList<TowerCannon> towerList;
 	private boolean leftMouseButtonPressed;
@@ -42,7 +39,6 @@ public class Player
 		
 		// - Automatic blocktype initialization
 		
-		this.index = 0;
 		this.waveManager = waveManager;
 		this.towerList = new ArrayList<TowerCannon>();
 		this.leftMouseButtonPressed = false;
@@ -82,18 +78,4 @@ public class Player
 			}
 		}
 	}
-	
-	private void cycleIndex()
-	{
-		index++;
-		if(index >= types.length)
-		{
-			index = 0;
-		}
-	}
-	
-	public void setX(int x) {
-		this.x = x;
-	}
-	
 }

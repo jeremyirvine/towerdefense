@@ -1,13 +1,13 @@
 package data;
 
-import static helpers.Artist.*;
-
-import java.beans.Statement;
+import static helpers.Artist.HEIGHT;
+import static helpers.Artist.WIDTH;
+import static helpers.Artist.DrawQuadTex;
+import static helpers.Artist.loadTexture;
 
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.opengl.Texture;
 
-import helpers.Announcer;
 import helpers.StateManager;
 import helpers.StateManager.GameState;
 import ui.UI;

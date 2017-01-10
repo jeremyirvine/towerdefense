@@ -1,19 +1,19 @@
 package data;
 
-import static helpers.Artist.CheckCollision;
+import static helpers.Artist.TILE_SIZE;
+import static helpers.Artist.checkCollision;
 import static helpers.Artist.DrawQuadTex;
 import static helpers.Clock.Delta;
 
 import org.newdawn.slick.opengl.Texture;
 
-import helpers.Announcer;
 import helpers.Vector2f;
 
 public class Projectile
 {
 
 	private Texture texture;
-	private float x, y, width, height, speed, xVelocity, yVelocity;
+	private float x, y, speed, xVelocity, yVelocity;
 	private int damage;
 	private Enemy target;
 	private boolean alive;
@@ -29,8 +29,6 @@ public class Projectile
 		this.y = y;
 		this.pos = new Vector2f(x, y);
 
-		this.width = width;
-		this.height = height;
 		this.size = new Vector2f(width, height);
 
 		this.speed = speed;
@@ -45,8 +43,8 @@ public class Projectile
 	private void calculateDirection()
 	{
 		float totalAllowedMovement = 1.0f;
-		float xDistanceFromTarget = Math.abs(target.getX() - x + Game.tileSize / 2);
-		float yDistanceFromTarget = Math.abs(target.getY() - y + Game.tileSize / 2);
+		float xDistanceFromTarget = Math.abs(target.getX() - x + TILE_SIZE / 2);
+		float yDistanceFromTarget = Math.abs(target.getY() - y + TILE_SIZE / 2);
 		float totalDistanceFromTarget = xDistanceFromTarget + yDistanceFromTarget;
 		float xPercentOfMovement = xDistanceFromTarget / totalDistanceFromTarget;
 		xVelocity = xPercentOfMovement;
@@ -67,7 +65,7 @@ public class Projectile
 			pos.setX(x);
 			pos.setY(y);
 
-			if (CheckCollision(pos, size, target.getPos(), target.getSize()))
+			if (checkCollision(pos, size, target.getPos(), target.getSize()))
 			{
 				target.damage(damage);
 				alive = false;

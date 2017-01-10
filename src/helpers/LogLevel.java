@@ -1,7 +1,5 @@
 package helpers;
 
-import java.awt.Color;
-
 public enum LogLevel 
 {
 	INFO ("INFO"),

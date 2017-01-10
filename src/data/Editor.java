@@ -1,16 +1,13 @@
 package data;
 
-import static helpers.Artist.*;
-import static helpers.MapUtils.*;
+import static helpers.Artist.HEIGHT;
+import static helpers.MapUtils.loadMap;
+import static helpers.MapUtils.saveMap;
 
 import javax.swing.JOptionPane;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
-
-import helpers.Announcer;
-import helpers.Clock;
-import helpers.MapUtils;
 
 public class Editor
 {

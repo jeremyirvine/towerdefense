@@ -1,12 +1,15 @@
 package helpers;
 
+import java.io.PrintStream;
 import java.util.HashMap;
 
-import data.TowerSomething;
+import data.ConsoleView;
 
 public class Announcer 
 {
 
+	private static ConsoleView cv;
+	
 	public static void printf(String msg, LogLevel lvl)
 	{
 		String cls = getCallerClassName();
@@ -38,17 +41,17 @@ public class Announcer
 			case WARN:
 				String mts = "[" + Clock.getTimeStamp() + "] [" + cls + "] [" + lvl.type + "] " + msg;
 //				System.err.println(mts);
-				TowerSomething.cv.addConsoleItem(mts, LogLevel.WARN);
+				cv.addConsoleItem(mts, LogLevel.WARN);
 				break;
 			case INFO:
 				mts = "[" + Clock.getTimeStamp() + "] [" + cls + "] [" + lvl.type + "] " + msg;
 //				System.out.println(mts);
-				TowerSomething.cv.addConsoleItem(mts, LogLevel.INFO);
+				cv.addConsoleItem(mts, LogLevel.INFO);
 				break;
 			case FATAL:
 				mts = "[" + Clock.getTimeStamp() + "] [" + cls + "] [" + lvl.type + "] " + msg;
 //				System.err.println(mts);
-				TowerSomething.cv.addConsoleItem(mts, LogLevel.FATAL);
+				cv.addConsoleItem(mts, LogLevel.FATAL);
 				break;
 		}
 		
@@ -82,7 +85,7 @@ public class Announcer
 		String cls = getCallerClassName();
 		String mts = "[" + Clock.getTimeStamp() + "] [" + cls + "] [INFO] " + msg;
 //		System.out.println(mts);
-		TowerSomething.cv.addConsoleItem(mts, LogLevel.INFO);
+		cv.addConsoleItem(mts, LogLevel.INFO);
 	}
 	
 	 private static String getCallerClassName() { 
@@ -98,5 +101,35 @@ public class Announcer
 	        }
 	        return null;
 	     }
+	 
+	 public static void initConsole(String[] args)
+	 {
+			if (args.length == 1)
+				if (args[0].equalsIgnoreCase("console"))
+				{
+					cv = new ConsoleView();
+
+					PrintStream myStream = new PrintStream(System.out)
+					{
+						@Override
+						public void println(String x)
+						{
+							super.println(x);
+							cv.addConsoleItem(x, LogLevel.INFO);
+						}
+					};
+					System.setOut(myStream);
+					PrintStream myStream2 = new PrintStream(System.err)
+					{
+						@Override
+						public void println(String x)
+						{
+							super.println(x);
+							cv.addConsoleItem(x, LogLevel.WARN);
+						}
+					};
+					System.setErr(myStream2);
+				}
+	 }
 	
 }

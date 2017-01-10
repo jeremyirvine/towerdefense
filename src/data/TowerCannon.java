@@ -1,6 +1,9 @@
 package data;
 
-import static helpers.Artist.*;
+import static helpers.Artist.DrawQuadTexRot;
+import static helpers.Artist.TILE_SIZE;
+import static helpers.Artist.DrawQuadTex;
+import static helpers.Artist.loadTexture;
 import static helpers.Clock.Delta;
 
 import java.util.ArrayList;
@@ -22,8 +25,8 @@ public class TowerCannon
 	public TowerCannon(Texture baseTexture, Texture cannonTexture, Tile startTile, int damage, int range,
 			ArrayList<Enemy> enemies)
 	{
-		this.startTile = startTile;
 		this.baseTexture = baseTexture;
+		this.startTile = startTile;
 		this.cannonTexture = cannonTexture;
 		this.x = startTile.getX();
 		this.y = startTile.getY();
@@ -36,8 +39,6 @@ public class TowerCannon
 		this.projectiles = new ArrayList<Projectile>();
 		this.enemies = enemies;
 		this.targeted = false;
-		// this.target = acquireTarget();
-		// this.angle = calculateAngle();
 	}
 
 	public void updateEnemyList(ArrayList<Enemy> newList)
@@ -107,8 +108,8 @@ public class TowerCannon
 	private void shoot()
 	{
 		timeSinceLastShot = 0;
-		projectiles.add(new Projectile(loadTexture("bullet"), target, x + Game.tileSize / 2 - Game.tileSize / 4,
-				y + Game.tileSize / 2 - Game.tileSize / 4, 32, 32, 600, damage));
+		projectiles.add(new Projectile(loadTexture("bullet"), target, x + TILE_SIZE / 2 - TILE_SIZE / 4,
+				y + TILE_SIZE / 2 - TILE_SIZE / 4, 32, 32, 600, damage));
 	}
 
 	public void draw()
